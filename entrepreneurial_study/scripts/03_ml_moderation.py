@@ -1,17 +1,4 @@
-"""
-03_ml_moderation.py
-===================
-Machine Learning Analysis:
-  1. Standardised OLS regression  (confirm predictor ranking)
-  2. Random Forest + Permutation Importance + SHAP
-  3. Moderation Analysis via:
-       a) Stratified RF+SHAP by education group
-       b) Interaction-term regression
-       c) Bootstrap moderated mediation
-  4. All outputs saved to outputs/
 
-Run:  python scripts/03_ml_moderation.py
-"""
 
 import os, warnings
 warnings.filterwarnings("ignore")
@@ -37,17 +24,13 @@ from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 
-# ─────────────────────────────────────────────
 # PATHS
-# ─────────────────────────────────────────────
 BASE      = os.path.join(os.path.dirname(__file__), "..")
 DATA_PATH = os.path.join(BASE, "data", "processed", "analysis_ready_clean.csv")
 TABLE_DIR = os.path.join(BASE, "outputs", "tables")
 FIG_DIR   = os.path.join(BASE, "outputs", "figures")
 
-# ─────────────────────────────────────────────
 # LOAD DATA
-# ─────────────────────────────────────────────
 print("=" * 60)
 print("LOADING PROCESSED DATA")
 print("=" * 60)
@@ -55,9 +38,9 @@ df = pd.read_csv(DATA_PATH)
 print(f"Shape: {df.shape}")
 print(f"Groups: {df['MOD_label'].value_counts().to_dict()}")
 
-# ─────────────────────────────────────────────
+
 # DEFINE FEATURES
-# ─────────────────────────────────────────────
+
 COG_ITEMS    = ["C1","C2","C3","C4","C5"]
 REG_ITEMS    = ["R1","R2","R3","R4","R5"]
 NORM_ITEMS   = ["N1","N2","N3","N4","N5","N6"]
@@ -76,9 +59,8 @@ print(f"\nFeatures : {X_cols}")
 print(f"Target   : {y_col}")
 print(f"Moderator: {MOD}  (1=EduYes, 0=EduNo)")
 
-# ============================================================
+
 # STEP 1: STANDARDISED OLS REGRESSION
-# ============================================================
 print("\n" + "=" * 60)
 print("STEP 1: STANDARDISED OLS REGRESSION")
 print("=" * 60)
@@ -118,9 +100,8 @@ plt.tight_layout()
 plt.savefig(os.path.join(FIG_DIR, "03_ols_betas.png"), dpi=150)
 plt.close()
 
-# ============================================================
-# STEP 2: CROSS-VALIDATED MODEL COMPARISON
-# ============================================================
+
+# STEP 2: CROSS-VALIDATED MODEL COMPARISON=
 print("\n" + "=" * 60)
 print("STEP 2: CROSS-VALIDATED MODEL COMPARISON (5-fold CV)")
 print("=" * 60)
@@ -159,9 +140,9 @@ cv_df = pd.DataFrame(cv_results).sort_values("R2_mean", ascending=False)
 cv_df.to_csv(os.path.join(TABLE_DIR, "cv_model_comparison.csv"), index=False)
 print(f"\n  Best model: {cv_df.iloc[0]['Model']}")
 
-# ============================================================
+
 # STEP 3: RANDOM FOREST — full model + SHAP
-# ============================================================
+
 print("\n" + "=" * 60)
 print("STEP 3: RANDOM FOREST + PERMUTATION IMPORTANCE + SHAP")
 print("=" * 60)
@@ -235,9 +216,9 @@ plt.tight_layout()
 plt.savefig(os.path.join(FIG_DIR, "06_shap_bar.png"), dpi=150)
 plt.close()
 
-# ============================================================
+
 # STEP 4: MODERATION — STRATIFIED ANALYSIS (by education group)
-# ============================================================
+
 print("\n" + "=" * 60)
 print("STEP 4a: MODERATION — STRATIFIED RF+SHAP")
 print("=" * 60)
@@ -335,9 +316,8 @@ if len(strat_results) == 2:
     plt.close()
     print("  Moderation comparison plot saved.")
 
-# ============================================================
 # STEP 4b: MODERATION — INTERACTION TERM REGRESSION
-# ============================================================
+
 print("\n" + "=" * 60)
 print("STEP 4b: MODERATION — INTERACTION TERM REGRESSION")
 print("=" * 60)
@@ -381,9 +361,9 @@ print("\n── Interaction Terms (Moderation Effects) ──")
 print(int_result.to_string(index=False))
 int_result.to_csv(os.path.join(TABLE_DIR, "moderation_interaction_terms.csv"), index=False)
 
-# ============================================================
+
 # STEP 4c: BOOTSTRAP MODERATION TEST
-# ============================================================
+
 print("\n" + "=" * 60)
 print("STEP 4c: BOOTSTRAP MODERATION TEST (B=2000)")
 print("=" * 60)
@@ -448,9 +428,9 @@ plt.tight_layout()
 plt.savefig(os.path.join(FIG_DIR, "08_bootstrap_moderation.png"), dpi=150)
 plt.close()
 
-# ============================================================
+
 # STEP 5: ROBUSTNESS CHECK — no-outlier sample
-# ============================================================
+
 print("\n" + "=" * 60)
 print("STEP 5: ROBUSTNESS CHECK (full vs no-outlier)")
 print("=" * 60)
@@ -471,9 +451,9 @@ robust_df = pd.DataFrame({
 print(robust_df.to_string(index=False))
 robust_df.to_csv(os.path.join(TABLE_DIR, "robustness_full_vs_clean.csv"), index=False)
 
-# ============================================================
+
 # STEP 6: CONSOLIDATED SUMMARY TABLE
-# ============================================================
+
 print("\n" + "=" * 60)
 print("STEP 6: CONSOLIDATED SUMMARY TABLE")
 print("=" * 60)
