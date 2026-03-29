@@ -1,0 +1,4 @@
+Interaction,Beta,p_value,CI_lower,CI_upper,Significant
+COG_x_MOD,0.2214,0.0611,-0.0103,0.4531,False
+REG_x_MOD,-0.0333,0.7874,-0.276,0.2094,False
+NORM_x_MOD,-0.1007,0.4048,-0.3383,0.1369,False

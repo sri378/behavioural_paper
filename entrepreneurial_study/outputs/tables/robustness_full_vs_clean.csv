@@ -1,0 +1,4 @@
+Predictor,Beta_clean,Beta_full,p_clean,p_full
+COG,-0.5012,-0.4849,0.0,0.0
+REG,0.0131,0.0115,0.8266,0.8452
+NORM,0.0697,0.0761,0.2361,0.1949

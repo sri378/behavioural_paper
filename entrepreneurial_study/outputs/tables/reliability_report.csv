@@ -1,0 +1,5 @@
+construct,n_items,alpha,ci_lower,ci_upper
+COG,5,0.859,0.832,0.883
+REG,5,0.739,0.688,0.783
+NORM,6,0.663,0.599,0.719
+INTENT,6,0.806,0.77,0.839

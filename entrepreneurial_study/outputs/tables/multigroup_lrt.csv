@@ -1,0 +1,3 @@
+"","Df","AIC","BIC","Chisq","Chisq diff","RMSEA","Df diff","Pr(>Chisq)"
+"fit_mg_free",446,NA,NA,837.895285176098,NA,NA,NA,NA
+"fit_mg_constrained",449,NA,NA,870.748300560467,7.9264952206,0.265188847013547,3,0.0475555070688128
