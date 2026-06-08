@@ -58,7 +58,7 @@ print(f"Target   : {y_col}")
 print(f"Moderator: {MOD}  (1=EduYes, 0=EduNo)")
 
 
-# STEP 1: STANDARDISED OLS REGRESSION
+#STANDARDISED OLS REGRESSION
 print("\n" + "=" * 60)
 print("STEP 1: STANDARDISED OLS REGRESSION")
 print("=" * 60)
@@ -99,7 +99,7 @@ plt.savefig(os.path.join(FIG_DIR, "03_ols_betas.png"), dpi=150)
 plt.close()
 
 
-# STEP 2: CROSS-VALIDATED MODEL COMPARISON=
+#  MODEL COMPARISON
 print("\n" + "=" * 60)
 print("STEP 2: CROSS-VALIDATED MODEL COMPARISON (5-fold CV)")
 print("=" * 60)
@@ -427,7 +427,7 @@ plt.savefig(os.path.join(FIG_DIR, "08_bootstrap_moderation.png"), dpi=150)
 plt.close()
 
 
-# STEP 5: ROBUSTNESS CHECK — no-outlier sample
+#  ROBUSTNESS CHECK — no-outlier sample
 
 print("\n" + "=" * 60)
 print("STEP 5: ROBUSTNESS CHECK (full vs no-outlier)")
@@ -450,7 +450,7 @@ print(robust_df.to_string(index=False))
 robust_df.to_csv(os.path.join(TABLE_DIR, "robustness_full_vs_clean.csv"), index=False)
 
 
-# STEP 6: CONSOLIDATED SUMMARY TABLE
+# CONSOLIDATED SUMMARY TABLE
 
 print("\n" + "=" * 60)
 print("STEP 6: CONSOLIDATED SUMMARY TABLE")
